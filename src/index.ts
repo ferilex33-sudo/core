@@ -966,6 +966,8 @@ export type {
   ContractDataValidationIssue,
   ContractDataValidationResult,
 } from "./soroban";
+export { createSandbox } from "./soroban/sandbox";
+export type { ContractSandbox, SandboxResult } from "./soroban/sandbox";
 export { parseContractResult } from "./soroban/parseContractResult";
 export {
   getContractMethods,
@@ -1884,6 +1886,33 @@ export type {
   ExternalLogSink as InfraExternalLogSink,
 } from "./infrastructure/logger";
 
+// SDK plugin system (#1054)
+export {
+  PluginSystem,
+  createPluginSystem,
+  registerPlugin,
+  loadPlugin,
+  usePlugin,
+  getPluginSystem,
+} from "./infrastructure/pluginSystem";
+export type {
+  PluginRequestContext,
+  PluginPreRequestHook,
+  PluginPostRequestHook,
+  PluginErrorHook,
+  SDKPlugin,
+  PluginConfig,
+  PluginConfigInput,
+  PluginSystemOptions,
+} from "./infrastructure/pluginSystem";
+
+// SDK initialization helper (#1052)
+export { initializeSDK } from "./infrastructure/sdkInitializer";
+export type {
+  CacheStrategy,
+  SDKInitializationConfig,
+} from "./infrastructure/sdkInitializer";
+
 // ─── Runtime shape validators (#790) ──────────────────────────────────────────
 // Validate untrusted data against the SDK's own public type shapes at
 // runtime. All return SorokitResult<T> and never throw.
@@ -2297,6 +2326,17 @@ export type { DeduplicationStats } from "./network";
 // ─── Event-invalidated cache (#972) ───────────────────────────────────────────
 export { EventSmartCache, createEventSmartCache } from "./performance/smartCache";
 export type { EventCacheStats } from "./performance/smartCache";
+
+// ─── SDK operation profiler (#1055) ───────────────────────────────────────────
+export {
+  Profiler,
+  createProfiler,
+  startProfiling as startSDKProfiling,
+  stopProfiling as stopSDKProfiling,
+  profileOperation as profileSDKOperation,
+  getMetrics as getProfilerMetrics,
+} from "./performance/profiler";
+export type { ProfilerMetric } from "./performance/profiler";
 
 // ─── Transaction polling (#973) & sponsorship builder (#974) ──────────────────
 export {
